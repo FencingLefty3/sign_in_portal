@@ -1,0 +1,120 @@
+:root{
+  --bg:#1d1e1f;
+  --card:#222325;
+  --accent:#0b69ff;
+  --muted:#6b7280;
+  --radius:12px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg),#000000);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  color:#a1a6b1;
+}
+
+.container{
+  width:100%;
+  max-width:420px;
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:16px;
+}
+.brand h1{margin:0;font-size:1.5rem}
+.brand .tag{margin:4px 0 0;color:var(--muted);font-size:0.9rem}
+
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:0 8px 30px rgba(15,23,42,0.08);
+}
+
+.card h2{margin:0 0 12px;font-size:1.1rem}
+label{display:block;font-size:0.85rem;color:var(--muted);margin-top:12px}
+input{
+  width:100%;
+  padding:10px 12px;
+  margin-top:6px;
+  border:1px solid #e6eefb;
+  border-radius:8px;
+  font-size:1rem;
+  background:#fbfdff;
+}
+
+.btn{
+  display:inline-block;
+  width:100%;
+  padding:10px 12px;
+  margin-top:18px;
+  border-radius:10px;
+  border:0;
+  background:var(--accent);
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+.btn.alt{
+  background:#e6eefb;
+  color:var(--accent);
+  margin-top:12px;
+}
+
+.prank{
+  text-align:center;
+  padding:12px;
+  margin-top:12px;
+  border-radius:8px;
+  background:linear-gradient(180deg,#222325,#222325);
+}
+.hidden{display:none}
+
+.foot{margin-top:12px;text-align:center;color:var(--muted);font-size:0.85rem}
+.edu{font-weight:600;color:#9fb3d5;margin-top:8px}
+/* Popup styling */
+.popup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255,0,0,0.6);
+  animation: shake 0.4s ease-in-out 2;
+}
+
+.popup-content h2 {
+  color: red;
+  margin: 0 0 12px;
+  font-size: 1.5rem;
+}
+
+/* Hidden utility */
+.hidden { display: none; }
+
+/* Shaking animation for effect */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-10px); }
+  80% { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}

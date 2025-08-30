@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign In</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="brand">
+      <h1>FencingLefty3 Portal</h1>
+      <p class="tag">Secure sign in</p>
+    </header>
+
+    <section class="card">
+      <h2>Sign in to continue</h2>
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="off" required />
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="new-password" required />
+
+        <button type="submit" class="btn">Sign in</button>
+      </form>
+
+      <div id="prank" class="prank hidden" role="status" aria-live="polite">
+        <h3>You Computer Has Been Hacked!</h3>
+        <p>This page that DID SEND OR STORE your credentials.</p>
+        <p class="edu">Phishing is real — always check the URL, look for HTTPS, and never enter credentials on an unexpected page.</p>
+       
+      </div>
+    </section>
+
+    <footer class="foot">
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+<div id="hackPopup" class="popup hidden">
+  <div class="popup-content">
+    <h2>You’ve Been Hacked!</h2>
+    <p>Contact Microsoft Support Now:<br>
+    (401) 241 9353</p>
+  </div>
+</div>
+
+</html>
