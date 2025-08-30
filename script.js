@@ -1,55 +1,66 @@
-// script.js — harmless, client-side only
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
   const prank = document.getElementById("prank");
   const tryAgain = document.getElementById("tryAgain");
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  const hackPopup = document.getElementById("hackPopup");
+  const closePopup = document.getElementById("closePopup");
 
-  // Clear values (still never saved or sent)
-  document.getElementById("username").value = "";
-  document.getElementById("password").value = "";
-
-  // Show popup prank
-  document.getElementById("hackPopup").classList.remove("hidden");
-});
-
-document.getElementById("closePopup").addEventListener("click", () => {
-  document.getElementById("hackPopup").classList.add("hidden");
-
-  // After closing, show the prank/educational message
-  form.classList.add("hidden");
-  document.getElementById("prank").classList.remove("hidden");
-});
+  // 🎯 Define allowed username + password combos
+  const VALID_CREDENTIALS = {
+    "FencingLefty3": "Fen!!",     // username: admin, password: letmein
+    "Bounty_239": "Bou!!"     // add more pairs here if you want
+  };
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    
-    // Clear any possible fields in memory and avoid sending anywhere.
-    // We're deliberately NOT collecting or sending the values.
-    // For safety, immediately clear the inputs.
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
 
-    // Show the prank/educational panel
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
+      // ✅ Correct combo → trigger prank popup
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+
+      hackPopup.classList.remove("hidden");
+
+      // Optional: play sound
+      const scareSound = document.getElementById("scareSound");
+      if (scareSound) scareSound.play().catch(() => {});
+    } else {
+      // ❌ Wrong combo → show error
+      showError("Invalid username or password.");
+    }
+  });
+
+  closePopup.addEventListener("click", () => {
+    hackPopup.classList.add("hidden");
     form.classList.add("hidden");
     prank.classList.remove("hidden");
-
-    // Focus the Try Again button for keyboard users
-    tryAgain.focus();
   });
 
   tryAgain.addEventListener("click", () => {
-    // Reset UI to initial state
     prank.classList.add("hidden");
     form.classList.remove("hidden");
+    clearError();
     document.getElementById("username").focus();
   });
 
-  // Prevent Enter from accidentally submitting if inputs are empty
-  form.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      // Let the form handler deal with it — nothing will be sent.
+  // Helpers for showing error inline
+  function showError(msg) {
+    let err = document.getElementById("errorMsg");
+    if (!err) {
+      err = document.createElement("p");
+      err.id = "errorMsg";
+      err.style.color = "red";
+      err.style.marginTop = "8px";
+      form.appendChild(err);
     }
-  });
+    err.textContent = msg;
+  }
+
+  function clearError() {
+    const err = document.getElementById("errorMsg");
+    if (err) err.remove();
+  }
 });
