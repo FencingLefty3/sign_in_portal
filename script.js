@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ Define allowed combos and where they should redirect
   const VALID_CREDENTIALS = {
-    "Bounty_239": { password: "Bou!!!", redirect: "https://fencinglefty3.github.io" },
-    "FencingLefty3": { password: "Fen!!!", redirect: "https://google.com" }
+    "Bounty_239": { password: "Bou!!!", redirect: "https://fencinglefty3.github.io/dashboard" },
+    "FencingLefty3": { password: "Fen!!!", redirect: "https://fencinglefty3.github.io/dashboard" }
   };
 
   form.addEventListener("submit", (e) => {
@@ -37,3 +37,4 @@ document.addEventListener("DOMContentLoaded", () => {
     err.textContent = msg;
   }
 });
+
