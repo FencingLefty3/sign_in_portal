@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
-  const tryAgain = document.getElementById("tryAgain");
 
-  // 🎯 Define allowed username + password combos
+  // ✅ Define allowed combos and where they should redirect
   const VALID_CREDENTIALS = {
-    "FencingLefty3": "Fen!!",     // username: admin, password: letmein
-    "Bounty_239": "Bou!!"     // add more pairs here if you want
+    "Bounty_239": { password: "Bou!!!", redirect: "https://fencinglefty3.github.io" },
+    "FencingLefty3": { password: "Fen!!!", redirect: "https://google.com" }
   };
 
   form.addEventListener("submit", (e) => {
@@ -14,36 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
 
-    if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
-      // ✅ Correct combo → trigger prank popup
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
-
-      hackPopup.classList.remove("hidden");
-
-      // Optional: play sound
-      const scareSound = document.getElementById("scareSound");
-      if (scareSound) scareSound.play().catch(() => {});
+    if (
+      VALID_CREDENTIALS[username] &&
+      VALID_CREDENTIALS[username].password === password
+    ) {
+      // 🎉 Correct combo → redirect to the target link
+      window.location.href = VALID_CREDENTIALS[username].redirect;
     } else {
       // ❌ Wrong combo → show error
       showError("Invalid username or password.");
     }
   });
 
-  closePopup.addEventListener("click", () => {
-    hackPopup.classList.add("hidden");
-    form.classList.add("hidden");
-    prank.classList.remove("hidden");
-  });
-
-  tryAgain.addEventListener("click", () => {
-    prank.classList.add("hidden");
-    form.classList.remove("hidden");
-    clearError();
-    document.getElementById("username").focus();
-  });
-
-  // Helpers for showing error inline
   function showError(msg) {
     let err = document.getElementById("errorMsg");
     if (!err) {
@@ -54,10 +35,5 @@ document.addEventListener("DOMContentLoaded", () => {
       form.appendChild(err);
     }
     err.textContent = msg;
-  }
-
-  function clearError() {
-    const err = document.getElementById("errorMsg");
-    if (err) err.remove();
   }
 });
